@@ -113,3 +113,7 @@ a {
 .background-gray {
   background-color: rgb(255, 255, 255);
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
