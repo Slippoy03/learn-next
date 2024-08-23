@@ -1,3 +1,5 @@
+import styles from "./styles.module.css";
+
 export default function Header() {
-  return <div>Heater</div>;
+  return <div className={styles.header}>Heater</div>;
 }

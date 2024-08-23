@@ -19,7 +19,7 @@
   );
   --secondary-glow: radial-gradient(
     rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
+    rgba(141, 141, 141, 0)
   );
 
   --tile-start-rgb: 239, 245, 249;
@@ -43,7 +43,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
+    /* --background-start-rgb: 0, 0, 0; */
     --background-end-rgb: 0, 0, 0;
 
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
@@ -104,4 +104,12 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.text-red {
+  color: rgb(255, 0, 0);
+}
+
+.background-gray {
+  background-color: rgb(255, 255, 255);
 }
