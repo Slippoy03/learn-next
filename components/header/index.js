@@ -2,12 +2,30 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 
 export default function Header() {
-  return <div className={styles.header}>
-    <ul>
-      <li><Link href= "/" >Home</Link></li>
-      <li><Link href= "/users" >Users</Link></li>
-      <li><Link href= "/users/detail" >Detail</Link></li>
-      <li><Link href= "/profile" >Pro file</Link></li>
-    </ul>
-  </div>;
+  return (
+    <div className={styles.header}>
+      <ul className="list-disc pl-5">
+        <li>
+          <Link href="/" className="underline">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/users" className="underline">
+            Users
+          </Link>
+        </li>
+        <li>
+          <Link href="/users/detail" className="underline">
+            Detail
+          </Link>
+        </li>
+        <li>
+          <Link href="/profile" className="underline">
+            Profile
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
 }

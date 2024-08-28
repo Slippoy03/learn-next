@@ -4,7 +4,7 @@ export default function Main() {
   return (
     <>
       <Layout metaTitle="Home">
-        <p className="text-red">Home</p>
+        <p className="text-red-600">Home</p>
       </Layout>
     </>
   );
