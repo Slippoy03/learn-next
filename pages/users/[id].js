@@ -7,7 +7,7 @@ export default function UsersByName() {
  
  return (
   <Layout>
-   <p>Users by Name {id}</p>
+   <p className="bg-black text-red-600" >Users by Name {id }</p>
   </Layout>
  );
 }
