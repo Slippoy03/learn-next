@@ -25,6 +25,16 @@ export default function Header() {
             Profile
           </Link>
         </li>
+        <li>
+          <Link href="/notes" className="underline">
+            Notes
+          </Link>
+        </li>
+        <li>
+          <Link href="/posts" className="underline">
+            Posts
+          </Link>
+        </li>
       </ul>
     </div>
   );
