@@ -8,6 +8,7 @@ import {
  Button,
  Input,
  Textarea,
+ useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -20,6 +21,8 @@ export default function AddNotes() {
   title:"",
   description:"",
  });
+   const toast = useToast();
+
   
  const HandleSubmit = async () => {
   try {
@@ -36,6 +39,12 @@ export default function AddNotes() {
    const result = await response.json();
    if (result?.success) {
     router.push("/notes");
+     toast({
+       title: "Create data success",
+       status: "success",
+       duration: 1000,
+       position: "top",
+     });
    }
   } catch (error) {}
  };

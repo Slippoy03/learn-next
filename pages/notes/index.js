@@ -11,6 +11,7 @@ import {
   Heading,
   Text,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -20,15 +21,42 @@ const LayoutComponent = dynamic(() => import("@/layout"));
 export default function Notes() {
   const router = useRouter();
   const [notes, setNotes] = useState();
+   const toast = useToast();
 
   useEffect(() => {
     async function fetchingData() {
       const res = await fetch("https://service.pace-unv.cloud/api/notes");
       const listNotes = await res.json();
       setNotes(listNotes);
+       toast({
+         title: "Fetching data success",
+         status: "success",
+         duration: 1000,
+         position: "top",
+       });
     }
     fetchingData();
-  }, []);
+  }, [toast]);
+
+  const HandleDelete = async (id) => {
+  try {
+    const response = await fetch(
+      `https://service.pace-unv.cloud/api/notes/delete/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    
+    const result = await response.json();
+    
+    if (result?.success) {
+      router.reload();
+    }
+  } catch (error) {
+    console.error("Error deleting note:", error);
+  }
+};
+
 
   return (
     <>
@@ -62,7 +90,7 @@ export default function Notes() {
                       >
                         Edit
                       </Button>
-                      <Button flex="1" colorScheme="red">
+                      <Button  onClick={() => HandleDelete(item?.id)} flex="1" colorScheme="red">
                         Delete
                       </Button>
                     </CardFooter>
