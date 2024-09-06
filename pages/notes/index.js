@@ -15,48 +15,51 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useQueries } from "@/hooks/useQueries";
 
 const LayoutComponent = dynamic(() => import("@/layout"));
 
 export default function Notes() {
   const router = useRouter();
+  const { data: listNotes } = useQueries({
+    prefixUrl: "https://service.pace-unv.cloud/api/notes",
+  });
   const [notes, setNotes] = useState();
-   const toast = useToast();
+  const toast = useToast();
 
   useEffect(() => {
     async function fetchingData() {
       const res = await fetch("https://service.pace-unv.cloud/api/notes");
       const listNotes = await res.json();
       setNotes(listNotes);
-       toast({
-         title: "Fetching data success",
-         status: "success",
-         duration: 1000,
-         position: "top",
-       });
+      toast({
+        title: "Fetching data success",
+        status: "success",
+        duration: 1000,
+        position: "top",
+      });
     }
     fetchingData();
   }, [toast]);
 
   const HandleDelete = async (id) => {
-  try {
-    const response = await fetch(
-      `https://service.pace-unv.cloud/api/notes/delete/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    
-    const result = await response.json();
-    
-    if (result?.success) {
-      router.reload();
-    }
-  } catch (error) {
-    console.error("Error deleting note:", error);
-  }
-};
+    try {
+      const response = await fetch(
+        `https://service.pace-unv.cloud/api/notes/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
+      const result = await response.json();
+
+      if (result?.success) {
+        router.reload();
+      }
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  };
 
   return (
     <>
@@ -90,7 +93,11 @@ export default function Notes() {
                       >
                         Edit
                       </Button>
-                      <Button  onClick={() => HandleDelete(item?.id)} flex="1" colorScheme="red">
+                      <Button
+                        onClick={() => HandleDelete(item?.id)}
+                        flex="1"
+                        colorScheme="red"
+                      >
                         Delete
                       </Button>
                     </CardFooter>
