@@ -16,11 +16,17 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQueries } from "@/hooks/useQueries";
+import useSWR from "swr";
 
 const LayoutComponent = dynamic(() => import("@/layout"));
 
 export default function Notes() {
   const router = useRouter();
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error, isLoading } = useSWR(
+    "https://service.pace-unv.cloud/api/notes",
+    fetcher
+  );
   const { data: listNotes } = useQueries({
     prefixUrl: "https://service.pace-unv.cloud/api/notes",
   });
