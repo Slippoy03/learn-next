@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import AddEdit from "./AddEdit.js";
+import AddEditModal from "./AddEditModal.js";
 
 const LayoutComponent = dynamic(() => import("@/layout"));
 
@@ -98,13 +98,13 @@ export default function Notes({ initialNotes }) {
 
   const handleDeleteConfirmed = async () => {
     if (selectedNote) {
-      await handleDelete(selectedNote.id);
+      await handleDelete(selectedNote.id); 
       onDeleteClose();
     }
   };
 
   const confirmDelete = (id) => {
-    setSelectedNote({ id });
+    setSelectedNote({ id }); 
     onDeleteOpen();
   };
 
@@ -147,7 +147,7 @@ export default function Notes({ initialNotes }) {
           </Grid>
         </Box>
 
-        <AddEdit
+        <AddEditModal
           isOpen={isEditOpen}
           onClose={onEditClose}
           note={selectedNote}
