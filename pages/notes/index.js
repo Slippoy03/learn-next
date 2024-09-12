@@ -111,8 +111,7 @@ export default function Notes({ initialNotes }) {
   const handleSaveNote = (savedNote) => {
     if (isEditing) {
       setNotes((prevNotes) =>
-        prevNotes.map((note) => (note.id === savedNote.id ? savedNote : note))
-      );
+        prevNotes.map((note) => (note.id === savedNote.id ? savedNote : note)));
     } else {
       setNotes([...notes, savedNote]);
     }
@@ -120,61 +119,59 @@ export default function Notes({ initialNotes }) {
   };
 
   return (
-    <>
-      <LayoutComponent metaTitle="Notes">
-        <Box padding="5">
-          <Flex justifyContent="end">
-            <Button colorScheme="blue" onClick={handleAdd}>
-              Add fren
+    <LayoutComponent metaTitle="Notes">
+      <Box padding="5">
+        <Flex justifyContent="end">
+          <Button colorScheme="blue" onClick={handleAdd}>
+            Add fren
+          </Button>
+        </Flex>
+        <Grid templateColumns="repeat(3, 1fr)" gap={5}>
+          {notes?.map((note) => (
+            <GridItem key={note?.id}>
+              <Card>
+                <Heading>{note?.title}</Heading>
+                <Text>{note?.description}</Text>
+                <Button onClick={() => handleEdit(note)}>Edith</Button>
+                <Button
+                  colorScheme="red"
+                  onClick={() => confirmDelete(note.id)}
+                >
+                  Delete
+                </Button>
+              </Card>
+            </GridItem>
+          ))}
+        </Grid>
+      </Box>
+
+      <AddEdit
+        isOpen={isEditOpen}
+        onClose={onEditClose}
+        note={selectedNote}
+        isEditing={isEditing}
+        onSave={handleSaveNote}
+      />
+
+      <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} zIndex="1400">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Delet Confirmation</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Yakin dek?</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="red" onClick={handleDeleteConfirmed}>
+              YES! YES! YES!
             </Button>
-          </Flex>
-          <Grid templateColumns="repeat(3, 1fr)" gap={5}>
-            {notes?.map((note) => (
-              <GridItem key={note?.id}>
-                <Card>
-                  <Heading>{note?.title}</Heading>
-                  <Text>{note?.description}</Text>
-                  <Button onClick={() => handleEdit(note)}>Edith</Button>
-                  <Button
-                    colorScheme="red"
-                    onClick={() => confirmDelete(note.id)}
-                  >
-                    Delete
-                  </Button>
-                </Card>
-              </GridItem>
-            ))}
-          </Grid>
-        </Box>
-
-        <AddEdit
-          isOpen={isEditOpen}
-          onClose={onEditClose}
-          note={selectedNote}
-          isEditing={isEditing}
-          onSave={handleSaveNote}
-        />
-
-        <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} zIndex="1400">
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Delet Confirmation</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>Yakin dek?</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="red" onClick={handleDeleteConfirmed}>
-                YES! YES! YES!
-              </Button>
-              <Button variant="ghost" onClick={onDeleteClose}>
-                NO! NO! NO!
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </LayoutComponent>
-    </>
+            <Button variant="ghost" onClick={onDeleteClose}>
+              NO! NO! NO!
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </LayoutComponent>
   );
 }
 

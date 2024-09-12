@@ -3,21 +3,19 @@ import dynamic from "next/dynamic";
 const LayoutComponent = dynamic(() => import("@/layout"));
 
 export default function Posts({ posts }) {
-    console.log("posts data => ", posts);
+  console.log("posts data => ", posts);
   return (
-    <>
-      <LayoutComponent metaTitle="Home">
-        {posts.map((item) => (
-          <div>
-            <p>{item.id}</p>
-            <p>
-              <b>{item.title}</b>
-            </p>
-            <p>{item.body}</p>
-          </div>
-        ))}
-      </LayoutComponent>
-    </>
+    <LayoutComponent metaTitle="Home">
+      {posts.map((item) => (
+        <div>
+          <p>{item.id}</p>
+          <p>
+            <b>{item.title}</b>
+          </p>
+          <p>{item.body}</p>
+        </div>
+      ))}
+    </LayoutComponent>
   );
 }
 

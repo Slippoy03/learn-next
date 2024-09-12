@@ -2,8 +2,8 @@
 
 export default async function handler(res) {
   try {
-    const response = await (await fetch ("https://dummyjson.com/users")).json();
-    res.status(200).json ({ ... response });
+    const response = await (await fetch("https://dummyjson.com/users")).json();
+    res.status(200).json({ ...response });
   } catch (error) {}
   // res.status(200).json({ name: "John Doe" });
 }

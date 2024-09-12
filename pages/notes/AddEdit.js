@@ -40,7 +40,7 @@ export default function AddEditModal({
     const method = isEditing ? "PATCH" : "POST";
     const url = isEditing
       ? `https://service.pace-unv.cloud/api/notes/update/${note?.id}`
-      : `https://service.pace-unv.cloud/api/notes`;
+      : "https://service.pace-unv.cloud/api/notes";
 
     try {
       const response = await fetch(url, {
@@ -93,8 +93,7 @@ export default function AddEditModal({
                 placeholder="Description"
                 value={notes.description}
                 onChange={(e) =>
-                  setNotes({ ...notes, description: e.target.value })
-                }
+                  setNotes({ ...notes, description: e.target.value })}
               />
             </GridItem>
           </Grid>
